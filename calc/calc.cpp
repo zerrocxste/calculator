@@ -1,5 +1,5 @@
-﻿#include <iostream>
-#include <Windows.h>
+#include <iostream>
+#include <stdlib.h>
 
 enum OPERATORS
 {
@@ -18,24 +18,17 @@ enum
     CALC_SECOND_EXPRESSION
 };
 
-int main()
-{   
-    SetConsoleTitle("calculator");
-    
-    std::cout << "Hello\nDo not use space when input expression! e.g 2 + 2\n";
-
+float calc_expression(std::string expression)
+{
     float pflResult = 0;
-    static std::string expression, number1, number2;
+    std::string number1, number2;
     OPERATORS current_operator;
     bool collect_OK = false;
+   
     static int step = 0;
-
-    std::cout << std::endl << "enter: ";
-    std::cin >> expression;
-    std::cout << std::endl;
-
+    
     for (int j = 0; j < expression.size(); j++)
-    {      
+    {   
         if (expression[j] == '+')
         {
             current_operator = ADDITION;
@@ -75,12 +68,12 @@ int main()
                     collect_OK = true;
                 }
             }
-
+    
             if (!number2.empty() && collect_OK == true)
             {
                 float flNumber1 = atof(number1.c_str());
                 float flNumber2 = atof(number2.c_str());
-
+    
                 std::cout << "OPERATORS: " << current_operator << std::endl;
                 if (step <= WAIT_FOR_SECOND_NUMBER)
                 {
@@ -91,7 +84,7 @@ int main()
                     std::cout << "pflResult (float format): " << pflResult << std::endl;
                 }
                 std::cout << "#2 number (string format): " << number2 << std::endl << std::endl;
-
+    
                 switch (current_operator)
                 {
                 case ADDITION:
@@ -148,9 +141,41 @@ int main()
                 }
             }
         }    
-    } 
+    }
+    return pflResult;
+}
+
+int main()
+{   
+    std::cout << "Hello\nDo not use space when input expression! e.g 2 + 2\n";
+
+    bool skobki = false;
+    bool skobki_collect_OK = false;
+    std::string expression, temp_number;
+
+    std::cout << std::endl << "enter: ";
+    std::cin >> expression;
+    std::cout << std::endl;
+
+    for (int i = 0; i < expression.size(); i++)
+    {
+        if (expression[i - 1] == '(')
+        {
+            skobki = true;
+        }
+        if (skobki)
+        {
+            temp_number += expression[i];
+            if (expression[i + 1] == ')')
+                skobki = false;
+        }
+    }
     
-    std::cout << "result: " << pflResult << std::endl;
+    std::cout << "temp num: " << temp_number << std::endl;
+    
+    std::cout << "temp num result: " << calc_expression(temp_number);
+    
+    std::cout << "result: " << calc_expression(expression) << std::endl;
 
     system("pause");
 
