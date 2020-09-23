@@ -158,12 +158,20 @@ int main()
     std::cout << std::endl;
 
     for (int i = 0; i < expression.size(); i++)
-    {
-        if (expression[i - 1] == '(')
+    {   
+        while (true)
         {
-            skobki = true;
+            if (expression[i - 1] == '(')
+            {
+                //
+               
+                skobki = true;
+            }
+             if (expression[i] == '\0')
+                    break;
         }
-        if (skobki)
+        
+        if (skobki_collect_OK)
         {
             temp_number += expression[i];
             if (expression[i + 1] == ')')
