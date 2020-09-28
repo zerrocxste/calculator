@@ -123,7 +123,7 @@ float calc_ex(std::string expression)
 
             //std::cout << replace() << std::endl;
 
-            char res[50];
+            char res[999];
             strcpy(res, ex.c_str());
             memory_utils::StringReplace(res, replace().c_str(), std::to_string(pflResult).c_str());
             ex = res;
@@ -262,7 +262,7 @@ int main()
                 }
                 c++;
             }
-            char res[50];
+            char res[999];
             strcpy(res, expression.c_str());
             memory_utils::StringReplace(res, szReplaceData.c_str(), std::to_string(fltemp).c_str());
             expression = res;
