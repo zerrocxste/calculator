@@ -214,14 +214,11 @@ float calc_ex(std::string expression)
     return static_cast<float>(atof(ex.c_str()));
 }
 
-#define DEBUG 1
+#define DEBUG 0
 
 int main()
 {
     std::string expression;
-    float fltemp;
-    std::vector<char>vtempNum;
-    std::string szReplaceData;
     
     std::cout << "Hello\nDo not use space when input expression! e.g 2 + 2\n";
 #if DEBUG == 1
@@ -232,9 +229,12 @@ int main()
 #else
     std::cout << std::endl << "enter: ";
     std::cin >> expression;
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 #endif // DEBUG
 
+    float fltemp = 0;
+    std::vector<char>vtempNum;
+    std::string szReplaceData;
     for (int i = expression.size(); i >= 0; i--)
     {
         if (expression[i - 1] == '(')
@@ -271,8 +271,8 @@ int main()
             szReplaceData.clear();
         }
     }
-
-    std::cout << fltemp << std::endl;
+    if (fltemp != 0)
+        std::cout << fltemp << std::endl;
 
     std::cout << calc_ex(expression) << std::endl;
 
