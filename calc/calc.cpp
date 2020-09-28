@@ -274,7 +274,7 @@ int main()
     if (fltemp != 0)
         std::cout << fltemp << std::endl;
 
-    std::cout << calc_ex(expression) << std::endl;
+    std::cout << "result: " << calc_ex(expression) << std::endl;
 
     system("pause");
 
