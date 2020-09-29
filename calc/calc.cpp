@@ -118,7 +118,7 @@ float calc_ex(std::string expression)
                 
                 p += number2;
 
-                return p.c_str();
+                return p;
             };
 
             //std::cout << replace() << std::endl;
