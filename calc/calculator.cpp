@@ -111,14 +111,9 @@ float CCalculator::computeExpression(std::string pszExpression)
 
     for (int j = 0; j < ex.size(); j++)
     {
-        if (ex[j] == '+')
+        if (ex[j] == '+' || ex[j] == '-') 
         {
-            current_operator = OPERATORS::ADDITION;
-            step++;
-        }
-        else if (ex[j] == '-')
-        {
-            current_operator = OPERATORS::SUBSTRACTION;
+            current_operator = this->reintepretSymbol(ex[j]);
             step++;
         }
         else
