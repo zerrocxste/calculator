@@ -196,32 +196,16 @@ void CCalculator::solveBrackets()
         if (_szExpression[i - 1] == '(')
         {
             std::string szReplaceData;
-            std::vector<char>vTempNum;
             int c = i;
             while (true)
             {
                 if (_szExpression[c] == ')')
                 {
+                    flTemp = this->computeExpression(szReplaceData);
+                    szReplaceData = std::string("(") + szReplaceData + std::string(")");
                     break;
                 }
-                vTempNum.push_back(_szExpression[c]);
-                if (_szExpression[c + 1] == ')')
-                {
-                    std::string szTempNumber;
-                    for (auto c : vTempNum)
-                    {
-                        if (c == '(')
-                        {
-                            break;
-                        }
-                        szTempNumber += c;
-                    }
-                    #if DEBUG == 1
-                    std::cout << szTempNumber << " " << std::endl;
-                    #endif //DEBUG
-                    flTemp = this->computeExpression(szTempNumber);
-                    szReplaceData = std::string("(") + szTempNumber + std::string(")");
-                }
+                szReplaceData += _szExpression[c];
                 c++;
             }
             char res[256/*?*/];
@@ -234,9 +218,6 @@ void CCalculator::solveBrackets()
             #endif //DEBUG
         }
     }
-    #if DEBUG == 1
-    std::cout << flTemp << std::endl;
-    #endif //DEBUG
 }
 
 void CCalculator::compute()
