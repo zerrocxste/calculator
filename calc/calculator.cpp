@@ -1,6 +1,6 @@
 #include "calculator.h"
 
-bool CCalculator::getBrackets()
+bool CCalculator::findBrackets()
 {
     bool bResult = false;
     for (int i = 0; i < _szExpression.size(); i++)
@@ -241,7 +241,7 @@ void CCalculator::solveBrackets()
 
 void CCalculator::compute()
 {
-    if (this->getBrackets())
+    if (this->findBrackets())
         this->solveBrackets();
 
     _flResult = this->computeExpression(_szExpression);
