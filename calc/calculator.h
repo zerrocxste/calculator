@@ -14,7 +14,7 @@ public:
 		return _flResult;
 	}
 private:
-	#define DEBUG 0
+	#define DEBUG 1
 	std::string _szExpression;
 	float _flResult;
 	enum OPERATORS

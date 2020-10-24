@@ -3,14 +3,16 @@
 bool CCalculator::findBrackets()
 {
     bool bResult = false;
-    for (int i = 0; i < _szExpression.size(); i++)
+
+    size_t pos = _szExpression.find('(');
+    if (pos <= _szExpression.size())
     {
-        if (_szExpression[i] == '(')
-        {
-            bResult = true;
-            break;
-        }      
-    }
+        #if DEBUG
+        std::cout << "found brackets! " << std::endl;
+        #endif // DEBUG
+        bResult = true;
+    }  
+
     return bResult;
 }
 
@@ -84,8 +86,7 @@ float CCalculator::computeExpression(std::string pszExpression)
 
                 auto replace = [number1, number2, current_operator]() -> std::string {
 
-                    std::string p;
-                    p += number1;
+                    std::string p = number1;
 
                     if (current_operator == OPERATORS::MULTIPLICATION)
                         p += std::string("*");
@@ -105,7 +106,7 @@ float CCalculator::computeExpression(std::string pszExpression)
         }
     }
 
-    int step = 0;
+    int /*OPERATORS*/ step = 0;
     std::string number1, number2;
     bool collect_OK = false;
 
@@ -184,6 +185,8 @@ float CCalculator::computeExpression(std::string pszExpression)
     }
 
     ex = std::to_string(pflResult);
+
+    std::cout << "ex " << ex << std::endl;
 
     return static_cast<float>(atof(ex.c_str()));
 }
